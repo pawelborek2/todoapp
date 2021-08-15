@@ -18,7 +18,7 @@ public class TaskGroupService {
     private TaskGroupRepository repository;
     private TaskRepository taskRepository;
 
-    public TaskGroupService(final TaskGroupRepository repository,final TaskRepository taskRepository,final TaskConfigurationProperties config) {
+    public TaskGroupService(final TaskGroupRepository repository,final TaskRepository taskRepository) {
         this.repository = repository;
         this.taskRepository = taskRepository;
     }
@@ -41,5 +41,6 @@ public class TaskGroupService {
         }
         TaskGroup result = repository.findById(groupId).orElseThrow(() -> new IllegalArgumentException("TaskGroup with given id not found"));
         result.setDone(!result.isDone());
+        repository.save(result);
     }
 }
