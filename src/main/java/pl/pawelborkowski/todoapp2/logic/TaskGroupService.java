@@ -2,7 +2,6 @@ package pl.pawelborkowski.todoapp2.logic;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
-import pl.pawelborkowski.todoapp2.TaskConfigurationProperties;
 import pl.pawelborkowski.todoapp2.model.TaskGroup;
 import pl.pawelborkowski.todoapp2.model.TaskGroupRepository;
 import pl.pawelborkowski.todoapp2.model.TaskRepository;
@@ -12,8 +11,7 @@ import pl.pawelborkowski.todoapp2.model.projection.GroupWriteModel;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-@RequestScope
+
 public class TaskGroupService {
     private TaskGroupRepository repository;
     private TaskRepository taskRepository;
