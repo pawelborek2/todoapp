@@ -23,5 +23,5 @@ public interface TaskRepository {
     // Znajdowanie tasków wykonanych lub nie
     List<Task> findByDone(@Param("state") boolean done);
 
-
+    List<Task> findAllByGroup_Id(Integer id);
 }

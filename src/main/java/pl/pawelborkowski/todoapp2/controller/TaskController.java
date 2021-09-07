@@ -2,7 +2,6 @@ package pl.pawelborkowski.todoapp2.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +24,10 @@ class TaskController {
         this.repository = repository;
     }
 
-   @GetMapping (params ={"!sort","!page","!size"} )
+    @GetMapping (params ={"!sort","!page","!size"} )
     ResponseEntity<List<Task>> readAllTasks() {
         logger.warn("Exposing all the task");
-        return  ResponseEntity.ok(repository.findAll());
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping
@@ -57,6 +56,13 @@ class TaskController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/search/done")
+    ResponseEntity<List<Task>> readDoneTasks (@RequestParam(defaultValue = "") boolean state) {
+        return ResponseEntity.ok(
+                repository.findByDone(state)
+        );
+    }
+
     @PostMapping
     ResponseEntity<Task> createTask (@RequestBody  @Valid Task toCreate){
         Task result = repository.save(toCreate);
@@ -74,4 +80,6 @@ class TaskController {
                 .ifPresent(task -> task.setDone(!task.isDone()));
         return ResponseEntity.noContent().build();
     }
+
+
 }
