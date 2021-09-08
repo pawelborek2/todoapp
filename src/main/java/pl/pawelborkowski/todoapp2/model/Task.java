@@ -63,8 +63,12 @@ import java.time.LocalDateTime;
     }
 
 
-    public TaskGroup getGroup() {
+    TaskGroup getGroup() {
         return group;
+    }
+
+    void setGroup(TaskGroup group) {
+        this.group = group;
     }
 
     public void updateFrom(final Task source)  {

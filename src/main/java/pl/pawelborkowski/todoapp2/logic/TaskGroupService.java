@@ -1,7 +1,6 @@
 package pl.pawelborkowski.todoapp2.logic;
 
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
+import pl.pawelborkowski.todoapp2.model.Project;
 import pl.pawelborkowski.todoapp2.model.TaskGroup;
 import pl.pawelborkowski.todoapp2.model.TaskGroupRepository;
 import pl.pawelborkowski.todoapp2.model.TaskRepository;
@@ -20,15 +19,18 @@ public class TaskGroupService {
         this.repository = repository;
         this.taskRepository = taskRepository;
     }
-
     public GroupReadModel createGroup(final GroupWriteModel source){
-        TaskGroup result = repository.save(source.toGroup());
+        return createGroup(source,null);
+    }
+
+    public GroupReadModel createGroup(GroupWriteModel source, Project project) {
+        TaskGroup result = repository.save(source.toGroup(project));
         return new GroupReadModel(result);
     }
 
+
     public List<GroupReadModel> readAllGroup() {
-        return repository.findAll()
-                .stream()
+        return repository.findAll().stream()
                 .map(GroupReadModel::new)
                 .collect(Collectors.toList());
     }
@@ -41,4 +43,6 @@ public class TaskGroupService {
         result.setDone(!result.isDone());
         repository.save(result);
     }
+
+
 }

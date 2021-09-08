@@ -32,7 +32,7 @@ import java.util.Set;
 
     public String getDescription() { return description; }
 
-    void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) { this.description = description; }
 
     public Set<TaskGroup> getTasksGroups() {
         return tasksGroups;
