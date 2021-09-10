@@ -18,7 +18,7 @@ import java.util.Set;
     private Set<TaskGroup> tasksGroups;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private Set<ProjectSteps> projectSteps;
+    private Set<ProjectSteps> steps;
 
     public Project()
     {
@@ -42,12 +42,12 @@ import java.util.Set;
         this.tasksGroups = tasksGroups;
     }
 
-    public Set<ProjectSteps> getProjectSteps() {
-        return projectSteps;
+    public Set<ProjectSteps> getSteps() {
+        return steps;
     }
 
-    public void setProjectSteps(Set<ProjectSteps> projectSteps) {
-        this.projectSteps = projectSteps;
+    public void setSteps(Set<ProjectSteps> projectSteps) {
+        this.steps = projectSteps;
     }
 
 }
