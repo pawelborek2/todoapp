@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.pawelborkowski.todoapp2.logic.TaskGroupService;
-import pl.pawelborkowski.todoapp2.model.ProjectSteps;
 import pl.pawelborkowski.todoapp2.model.Task;
 import pl.pawelborkowski.todoapp2.model.TaskRepository;
 import pl.pawelborkowski.todoapp2.model.projection.GroupReadModel;
@@ -22,6 +21,7 @@ import java.net.URI;
 import java.util.List;
 
 @Controller
+@IllegalExceptionProcessing
 @RequestMapping("/groups")
 public class TaskGroupController {
     private static final Logger logger = LoggerFactory.getLogger(TaskGroupController.class);
@@ -60,8 +60,6 @@ public class TaskGroupController {
         return "groups";
     }
 
-
-
     @ResponseBody
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<GroupReadModel> createGroup (@RequestBody @Valid GroupWriteModel model) {
@@ -91,17 +89,6 @@ public class TaskGroupController {
         return ResponseEntity.noContent().build();
     }
 
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    ResponseEntity<String> handleIllegalArgument (IllegalArgumentException e) {
-        return ResponseEntity.notFound().build();
-    }
-
-
-    @ExceptionHandler(IllegalStateException.class)
-    ResponseEntity<String> handleIllegalState(IllegalStateException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
 
     @ModelAttribute("groups")
     List<GroupReadModel> getGroups() {
